@@ -2,3 +2,62 @@ body {
     background-color: #212121;
     font-family: sans-serif;
 }
+
+/* Timeline item */
+.vis-item {
+    background-color: #61717a;
+    border: 0;
+    color: #ffffff;
+}
+
+/* Date text */
+.vis-time-axis .vis-text {
+    color: #e0e0e0;
+}
+
+/* Player overlap lines */
+.vis-custom-time.start,
+.vis-custom-time.end {
+    background-color: #FFFFFF90;
+    pointer-events: none; /* Prevents dragging */
+}
+
+/* Grid lines */
+.vis-time-axis .vis-grid.vis-odd,
+.vis-time-axis .vis-grid.vis-even,
+.vis-panel.vis-center {
+    border-color: #404040;
+}
+
+/* Hides outter lines */
+.vis-timeline.vis-bottom.vis-ltr,
+.vis-panel.vis-top,
+.vis-panel.vis-bottom {
+    border-width: 0;
+}
+
+/* Hides scroll bar */
+.vis-panel.vis-left.vis-vertical-scroll {
+    visibility: hidden;
+}
+
+/* Ranks */
+.vis-item.cloudian {
+    background-color: #5555FF;
+}
+
+.vis-item.elder {
+    background-color: #AA00AA;
+}
+
+.vis-item.chicken {
+    background-color: #FF5555;
+}
+
+.vis-item.chick {
+    background-color: #FF55FF;
+}
+
+.vis-item.egg {
+    background-color: #00AA00;
+}
