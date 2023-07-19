@@ -8,7 +8,7 @@ async function createTimeline(uuid) {
     let hasPlayer = uuid !== undefined;
     let player = hasPlayer ? await getPlayerData('/uuid/' + uuid) : undefined;
 
-    let params = hasPlayer ? '/overlap/' + uuid + "?limit=1000" : '/most_time?limit=1000';
+    let params = (hasPlayer ? '/overlap/' + uuid : '/most_time') + '?limit=1000';
     let data = await getPlayerData(params);
     if (hasPlayer) data.push(getDarkenedBackground(player));
 
