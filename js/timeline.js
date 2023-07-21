@@ -6,23 +6,27 @@ createTimeline();
 
 async function createTimeline(uuid) {
 
+    if (timeline !== undefined) timeline.destroy();
+    timeline = new vis.Timeline(timelineContainer);
+
     let hasPlayer = uuid !== undefined;
     let player = hasPlayer ? await getPlayer(uuid) : undefined;
+    
+    options = getOptions(player);
+    timeline.setOptions(options);
 
     let playerdata = await (hasPlayer ? getOverlap(uuid) : getAll());
     let alts = await getAlts();
 
     let items = createItems(playerdata, alts);
-    if (hasPlayer) items.push(createDarkenedBackground(player));
-
-    options = getOptions(player);
-    timeline = new vis.Timeline(timelineContainer, items, options);
 
     if (hasPlayer) {
+        items.push(createDarkenedBackground(player));
         timeline.addCustomTime(player.firstPlayed, 'start');
         timeline.addCustomTime(player.lastPlayed, 'end');
     }
 
+    timeline.setItems(items);
     events();
 
 }
@@ -83,15 +87,15 @@ function events() {
 
     // When clicking a player, a focused timeline is created showing overlapping players.
     timeline.on('select', function (properties) {
-        timeline.destroy();
         createTimeline(properties.items);
     });
 
     // Adjusts height when zoom has changed
     timeline.on('changed', function () {
+        let window = timeline.getWindow();
+        options.start = window.start;
+        options.end = window.end;
         options.height = innerHeight-20;
-        options.start = undefined;
-        options.end = undefined;
         timeline.setOptions(options);
     });
     
