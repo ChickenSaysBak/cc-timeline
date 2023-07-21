@@ -7,7 +7,13 @@ body {
 .vis-item {
     background-color: #61717a;
     border: 0;
-    color: #ffffff;
+    color: white;
+}
+
+/* Tooltip */
+div.vis-tooltip {
+    background-color: #161616;
+    color: white
 }
 
 /* Date text */
@@ -42,22 +48,22 @@ body {
 }
 
 /* Ranks */
-.vis-item.cloudian {
+.cloudian {
     background-color: #5555FF;
 }
 
-.vis-item.elder {
+.elder {
     background-color: #AA00AA;
 }
 
-.vis-item.chicken {
+.chicken {
     background-color: #FF5555;
 }
 
-.vis-item.chick {
+.chick {
     background-color: #FF55FF;
 }
 
-.vis-item.egg {
+.egg {
     background-color: #00AA00;
 }
