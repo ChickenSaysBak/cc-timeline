@@ -1,4 +1,4 @@
-const timelineContainer = document.getElementById("timeline");
+const timelineContainer = document.getElementById('timeline');
 var timeline;
 var options;
 
@@ -59,10 +59,37 @@ function createItems(playerdata, alts) {
 
         let altNames = altOwners.get(item.id)
             .sort((a, b) => (b.lastPlayed-b.firstPlayed) - (a.lastPlayed-a.firstPlayed))
-            .map(alt => alt.username);
+            .map(alt => {
+
+                let span = document.createElement('span');
+                span.innerText = alt.username;
+
+                let rank = translateRank(alt.rank).toLowerCase();
+                if (rank) span.className = rank;
+
+                return span;
+
+            });
             
-        item.title = "Alts: " + altNames.join(', ');
-        item.content = "<u>" + item.content + "</u>";
+        let title = document.createElement('span');
+        title.innerText = 'Alts: ';
+
+        for (let i = 0; i < altNames.length; ++i) {
+
+            title.appendChild(altNames[i]);
+            if (i >= altNames.length-1) continue;
+
+            let comma = document.createElement('span');
+            comma.innerText = ', ';
+            title.appendChild(comma);
+
+        }
+
+        item.title = title;
+
+        let underlinedName = document.createElement('u');
+        underlinedName.innerText = item.content;
+        item.content = underlinedName;
 
     }
 
@@ -90,13 +117,17 @@ function events() {
         createTimeline(properties.items);
     });
 
-    // Adjusts height when zoom has changed
+    // Adjusts height when zoom has changed.
     timeline.on('changed', function () {
+
+        // Prevents window from resetting.
         let window = timeline.getWindow();
         options.start = window.start;
         options.end = window.end;
+
         options.height = innerHeight-20;
         timeline.setOptions(options);
+
     });
     
 }
