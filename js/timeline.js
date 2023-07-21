@@ -1,5 +1,6 @@
 const timelineContainer = document.getElementById("timeline");
 var timeline;
+var options;
 
 createTimeline();
 
@@ -14,18 +15,15 @@ async function createTimeline(uuid) {
     let items = createItems(playerdata, alts);
     if (hasPlayer) items.push(createDarkenedBackground(player));
 
-    timeline = new vis.Timeline(timelineContainer, items, getOptions(player));
+    options = getOptions(player);
+    timeline = new vis.Timeline(timelineContainer, items, options);
 
     if (hasPlayer) {
         timeline.addCustomTime(player.firstPlayed, 'start');
         timeline.addCustomTime(player.lastPlayed, 'end');
     }
 
-    // When clicking a player, a focused timeline is created showing overlapping players.
-    timeline.on('select', function (properties) {
-        timeline.destroy();
-        createTimeline(properties.items);
-    });
+    events();
 
 }
 
@@ -79,4 +77,22 @@ function createDarkenedBackground(player) {
         style: 'background-color: #00000030'
     };
 
+}
+
+function events() {
+
+    // When clicking a player, a focused timeline is created showing overlapping players.
+    timeline.on('select', function (properties) {
+        timeline.destroy();
+        createTimeline(properties.items);
+    });
+
+    // Adjusts height when zoom has changed
+    timeline.on('changed', function () {
+        options.height = innerHeight-20;
+        options.start = undefined;
+        options.end = undefined;
+        timeline.setOptions(options);
+    });
+    
 }
