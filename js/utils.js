@@ -1,21 +1,3 @@
-async function getPlayerData(params) {
-
-    let response = await fetch('https://cc-playerdata-webapp.azuremicroservices.io/api/playerdata' + params);
-    let json = await response.json();
-
-    const mapPlayerData = playerdata => ({
-        id: playerdata.uuid,
-        content: playerdata.username,
-        start: playerdata.firstPlayed,
-        end: playerdata.lastPlayed,
-        className: translateRank(playerdata.rank).toLowerCase()
-    });
-    
-    if (Array.isArray(json)) return json.map(mapPlayerData);
-    else return mapPlayerData(json);
-
-}
-
 function translateRank(rank) {
     
     switch (rank) {
