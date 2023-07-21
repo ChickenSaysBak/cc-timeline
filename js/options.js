@@ -42,17 +42,7 @@ function getDefaultOptions() {
         orientation: {axis: 'both', item: 'top'},
         tooltip: {delay: 100},
         format: timeFormat,
-    
-        order: (item1, item2) => {
-    
-            let total1 = item1.end-item1.start;
-            let total2 = item2.end-item2.start;
-    
-            if (total1 > total2) return -1;
-            else if (total1 < total2) return 1;
-            else return 0;
-    
-        }
+        order: (item1, item2) => (item2.end-item2.start) - (item1.end-item1.start)
     
     };
 
@@ -61,7 +51,7 @@ function getDefaultOptions() {
 function getPlayerOptions(player) {
 
     let options = getDefaultOptions();
-    let start = player.start, end = player.end;
+    let start = player.firstPlayed, end = player.lastPlayed;
     let margin = (end-start) * 0.05;
 
     options.start = start-margin;
@@ -69,19 +59,17 @@ function getPlayerOptions(player) {
 
     options.order = (item1, item2) => {
     
-        if (player.id === item1.id) return -1;
-        else if (player.id === item2.id) return 1;
+        if (player.uuid === item1.id) return -1;
+        else if (player.uuid === item2.id) return 1;
 
-        let s = player.start, e = player.end;
+        let s = player.firstPlayed, e = player.lastPlayed;
         let s1 = item1.start, e1 = item1.end;
         let s2 = item2.start, e2 = item2.end;
 
         let absDif1 = Math.abs(s-s1) + Math.abs(e-e1);
         let absDif2 = Math.abs(s-s2) + Math.abs(e-e2);
 
-        if (absDif1 < absDif2) return -1;
-        else if (absDif1 > absDif2) return 1;
-        else return 0;
+        return absDif1 - absDif2;
 
     };
 
