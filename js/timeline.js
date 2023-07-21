@@ -6,19 +6,19 @@ createTimeline();
 async function createTimeline(uuid) {
 
     let hasPlayer = uuid !== undefined;
-    let player = hasPlayer ? await getPlayerData('/uuid/' + uuid) : undefined;
+    let player = hasPlayer ? await getPlayer(uuid) : undefined;
 
     let playerdata = await (hasPlayer ? getOverlap(uuid) : getAll());
     let alts = await getAlts();
 
     let items = createItems(playerdata, alts);
-    if (hasPlayer) data.push(createDarkenedBackground(player));
+    if (hasPlayer) items.push(createDarkenedBackground(player));
 
     timeline = new vis.Timeline(timelineContainer, items, getOptions(player));
 
     if (hasPlayer) {
-        timeline.addCustomTime(player.start, 'start');
-        timeline.addCustomTime(player.end, 'end');
+        timeline.addCustomTime(player.firstPlayed, 'start');
+        timeline.addCustomTime(player.lastPlayed, 'end');
     }
 
     // When clicking a player, a focused timeline is created showing overlapping players.
@@ -70,8 +70,8 @@ function createDarkenedBackground(player) {
     return {
         id: 'background', 
         content: '', 
-        start: player.start, 
-        end: player.end, 
+        start: player.firstPlayed, 
+        end: player.lastPlayed, 
         type: 'background', 
         style: 'background-color: #00000030'
     };
