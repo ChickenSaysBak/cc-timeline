@@ -55,7 +55,10 @@ function createItems(playerdata, alts) {
 
         if (!altOwners.has(item.id)) continue;
 
-        let altNames = altOwners.get(item.id).map(alt => alt.username);
+        let altNames = altOwners.get(item.id)
+            .sort((a, b) => (b.lastPlayed-b.firstPlayed) - (a.lastPlayed-a.firstPlayed))
+            .map(alt => alt.username);
+            
         item.title = "Alts: " + altNames.join(', ');
         item.content = "<u>" + item.content + "</u>";
 
