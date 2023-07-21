@@ -40,6 +40,7 @@ function getDefaultOptions() {
         verticalScroll: true,
         horizontalScroll: true,
         orientation: {axis: 'both', item: 'top'},
+        tooltip: {delay: 100},
         format: timeFormat,
     
         order: (item1, item2) => {
