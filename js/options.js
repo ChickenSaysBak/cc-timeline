@@ -1,27 +1,27 @@
 const timeFormat = {
 
     minorLabels: {
-      millisecond:'SSS',
-      second:     's',
-      minute:     'hh:mm a',
-      hour:       'hh:mm a',
-      weekday:    'ddd D',
-      day:        'D',
-      week:       'w',
-      month:      'MMM',
-      year:       'YYYY'
+      millisecond:"SSS",
+      second:     "s",
+      minute:     "hh:mm a",
+      hour:       "hh:mm a",
+      weekday:    "ddd D",
+      day:        "D",
+      week:       "w",
+      month:      "MMM",
+      year:       "YYYY"
     },
 
     majorLabels: {
-      millisecond:'hh:mm:ss a',
-      second:     'D MMMM hh:mm a',
-      minute:     'ddd D MMMM',
-      hour:       'ddd D MMMM',
-      weekday:    'MMMM YYYY',
-      day:        'MMMM YYYY',
-      week:       'MMMM YYYY',
-      month:      'YYYY',
-      year:       ''
+      millisecond:"hh:mm:ss a",
+      second:     "D MMMM hh:mm a",
+      minute:     "ddd D MMMM",
+      hour:       "ddd D MMMM",
+      weekday:    "MMMM YYYY",
+      day:        "MMMM YYYY",
+      week:       "MMMM YYYY",
+      month:      "YYYY",
+      year:       ""
     }
 
 };
@@ -32,14 +32,14 @@ function getDefaultOptions() {
 
         showCurrentTime: false,
         height: innerHeight-20,
-        start: '2016-01-01',
-        end: '2023-06-01',
-        min: '2016-01-01',
-        max: '2023-06-01',
-        zoomKey: 'ctrlKey',
+        start: "2016-01-01",
+        end: "2023-06-01",
+        min: "2016-01-01",
+        max: "2023-06-01",
+        zoomKey: "ctrlKey",
         verticalScroll: true,
         horizontalScroll: true,
-        orientation: {axis: 'both', item: 'top'},
+        orientation: {axis: "both", item: "top"},
         tooltip: {delay: 0, followMouse: true},
         format: timeFormat,
         order: (item1, item2) => (item2.end-item2.start) - (item1.end-item1.start)

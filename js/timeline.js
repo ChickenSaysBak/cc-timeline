@@ -1,4 +1,4 @@
-const timelineContainer = document.getElementById('timeline');
+const timelineContainer = document.getElementById("timeline");
 var timeline;
 var options;
 
@@ -22,8 +22,8 @@ async function createTimeline(uuid) {
 
     if (hasPlayer) {
         items.push(createDarkenedBackground(player));
-        timeline.addCustomTime(player.firstPlayed, 'start');
-        timeline.addCustomTime(player.lastPlayed, 'end');
+        timeline.addCustomTime(player.firstPlayed, "start");
+        timeline.addCustomTime(player.lastPlayed, "end");
     }
 
     timeline.setItems(items);
@@ -61,7 +61,7 @@ function createItems(playerdata, alts) {
             .sort((a, b) => (b.lastPlayed-b.firstPlayed) - (a.lastPlayed-a.firstPlayed))
             .map(alt => {
 
-                let span = document.createElement('span');
+                let span = document.createElement("span");
                 span.innerText = alt.username;
 
                 let rank = translateRank(alt.rank).toLowerCase();
@@ -71,23 +71,23 @@ function createItems(playerdata, alts) {
 
             });
             
-        let title = document.createElement('span');
-        title.innerText = 'Alts: ';
+        let title = document.createElement("span");
+        title.innerText = "Alts: ";
 
         for (let i = 0; i < altNames.length; ++i) {
 
             title.appendChild(altNames[i]);
             if (i >= altNames.length-1) continue;
 
-            let comma = document.createElement('span');
-            comma.innerText = ', ';
+            let comma = document.createElement("span");
+            comma.innerText = ", ";
             title.appendChild(comma);
 
         }
 
         item.title = title;
 
-        let underlinedName = document.createElement('u');
+        let underlinedName = document.createElement("u");
         underlinedName.innerText = item.content;
         item.content = underlinedName;
 
@@ -100,12 +100,12 @@ function createItems(playerdata, alts) {
 function createDarkenedBackground(player) {
 
     return {
-        id: 'background', 
-        content: '', 
+        id: "background", 
+        content: "", 
         start: player.firstPlayed, 
         end: player.lastPlayed, 
-        type: 'background', 
-        style: 'background-color: #00000030'
+        type: "background", 
+        style: "background-color: #00000030"
     };
 
 }
@@ -113,12 +113,12 @@ function createDarkenedBackground(player) {
 function events() {
 
     // When clicking a player, a focused timeline is created showing overlapping players.
-    timeline.on('select', function (properties) {
+    timeline.on("select", function (properties) {
         createTimeline(properties.items);
     });
 
     // Adjusts height when zoom has changed.
-    timeline.on('changed', function () {
+    timeline.on("changed", function () {
 
         // Prevents window from resetting.
         let window = timeline.getWindow();
