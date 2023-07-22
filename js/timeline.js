@@ -2,6 +2,11 @@ const timelineContainer = document.getElementById("timeline");
 var timeline;
 var options;
 
+// window.addEventListener("load", () => {
+//     const loader = document.querySelector(".loader");
+//     loader.classList.add("loader-hidden");
+// });
+
 createTimeline();
 
 async function createTimeline(uuid) {
@@ -114,10 +119,10 @@ function events() {
 
     // When clicking a player, a focused timeline is created showing overlapping players.
     timeline.on("select", function (properties) {
+        timelineContainer.append(createLoader());
         createTimeline(properties.items);
     });
 
-    // Adjusts height when zoom has changed.
     timeline.on("changed", function () {
 
         // Prevents window from resetting.
@@ -125,8 +130,12 @@ function events() {
         options.start = window.start;
         options.end = window.end;
 
+        // Adjusts height when zoom has changed.
         options.height = innerHeight-20;
         timeline.setOptions(options);
+
+        // Removes loading screen.
+        removeLoader();
 
     });
     

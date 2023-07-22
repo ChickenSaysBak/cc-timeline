@@ -23,3 +23,17 @@ function translateRank(rank) {
     };
 
 }
+
+function createLoader() {
+
+    let loader = document.createElement("div");
+    loader.className = "loader";
+
+    return loader;
+
+}
+
+function removeLoader() {
+    const loader = document.querySelector(".loader");
+    if (loader !== null) loader.remove();
+}
