@@ -31,7 +31,7 @@ function getDefaultOptions() {
     return {
 
         showCurrentTime: false,
-        height: innerHeight-20,
+        height: "100%",
         start: "2016-01-01",
         end: "2023-06-01",
         min: "2016-01-01",

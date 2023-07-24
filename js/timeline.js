@@ -2,11 +2,6 @@ const timelineContainer = document.getElementById("timeline");
 var timeline;
 var options;
 
-// window.addEventListener("load", () => {
-//     const loader = document.querySelector(".loader");
-//     loader.classList.add("loader-hidden");
-// });
-
 createTimeline();
 
 async function createTimeline(uuid) {
@@ -123,20 +118,7 @@ function events() {
         createTimeline(properties.items);
     });
 
-    timeline.on("changed", function () {
-
-        // Prevents window from resetting.
-        let window = timeline.getWindow();
-        options.start = window.start;
-        options.end = window.end;
-
-        // Adjusts height when zoom has changed.
-        options.height = innerHeight-20;
-        timeline.setOptions(options);
-
-        // Removes loading screen.
-        removeLoader();
-
-    });
+    // Removes loading screen
+    timeline.on("changed", () => removeLoader());
     
 }
