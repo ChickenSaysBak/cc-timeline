@@ -1,5 +1,11 @@
+const resetButton = document.getElementById("reset");
 const searchBar = document.getElementById("player-search");
 var players = [];
+
+resetButton.addEventListener("click", () => {
+    searchBar.value = "";
+    createTimeline();
+});
 
 (async function() {
     players = await getMostTime(true);
@@ -164,23 +170,5 @@ function autocomplete() {
     function closeResults() {
         for (let results of document.getElementsByClassName("autocomplete-results")) results.parentNode.removeChild(results);
     }
-
-    // function setActive(results) {
-    
-    //     if (!results) return;
-    //     removeActive(results);
-        
-    //     if (currentFocus >= results.length) currentFocus = 0;
-    //     if (currentFocus < 0) currentFocus = (results.length - 1);
-        
-    //     let currentResult = results[currentFocus];
-    //     currentResult.classList.add("autocomplete-focused");
-    //     searchBar.value = currentResult.getElementsByTagName("input")[0].value;
-      
-    // }
-    
-    // function removeActive(results) {
-    //     for (let result of results) result.classList.remove("autocomplete-focused");
-    // }
     
 }
