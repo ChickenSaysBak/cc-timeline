@@ -6,21 +6,26 @@ createTimeline();
 
 async function createTimeline(uuid) {
 
-    if (timeline !== undefined) timeline.destroy();
+    if (timeline !== undefined) {
+        timeline.destroy();
+        timelineContainer.append(createLoader());
+        document.getElementById("player-search").blur();
+    }
+
     timeline = new vis.Timeline(timelineContainer);
 
     let hasPlayer = uuid !== undefined;
-    let player = hasPlayer ? await getPlayer(uuid) : undefined;
+    let player = hasPlayer ? await getPlayer(uuid, true) : undefined;
     
     options = getOptions(player);
     timeline.setOptions(options);
 
-    let playerdata = await (hasPlayer ? getOverlap(uuid) : getAll());
+    let playerdata = await (hasPlayer ? getOverlap(uuid) : getMostTime());
     let alts = await getAlts();
-
-    let items = createItems(playerdata, alts);
+    let items = await createItems(playerdata, alts, player);
 
     if (hasPlayer) {
+        timeline.setGroups([{id: "focused", content: ""}, {id: "unfocused", content: ""}]);
         items.push(createDarkenedBackground(player));
         timeline.addCustomTime(player.firstPlayed, "start");
         timeline.addCustomTime(player.lastPlayed, "end");
@@ -31,7 +36,7 @@ async function createTimeline(uuid) {
 
 }
 
-function createItems(playerdata, alts) {
+async function createItems(playerdata, alts, focusedPlayer) {
 
     let altOwners = new Map();
 
@@ -45,12 +50,20 @@ function createItems(playerdata, alts) {
 
     }
 
+    // Adds the focused player's alts and reverts to focused player's original time span instead of combined.
+    if (focusedPlayer && altOwners.has(focusedPlayer.uuid)) {
+        Array.prototype.push.apply(playerdata, altOwners.get(focusedPlayer.uuid));
+        focusedPlayer = await getPlayer(focusedPlayer.uuid, false);
+    }
+
     let items = playerdata.map(player => ({
         id: player.uuid,
         content: player.username,
-        start: player.firstPlayed,
-        end: player.lastPlayed,
-        className: translateRank(player.rank).toLowerCase()
+        start: focusedPlayer && focusedPlayer.uuid == player.uuid ? focusedPlayer.firstPlayed : player.firstPlayed,
+        end: focusedPlayer && focusedPlayer.uuid == player.uuid ? focusedPlayer.lastPlayed :  player.lastPlayed,
+        className: translateRank(player.rank).toLowerCase(),
+        owner: player.owner,
+        group: focusedPlayer && (player.uuid === focusedPlayer.uuid || player.owner === focusedPlayer.uuid) ? "focused" : "unfocused"
     }));
 
     for (let item of items) {
@@ -105,7 +118,7 @@ function createDarkenedBackground(player) {
         start: player.firstPlayed, 
         end: player.lastPlayed, 
         type: "background", 
-        style: "background-color: #00000030"
+        style: "background-color: #0000003a"
     };
 
 }
@@ -113,8 +126,8 @@ function createDarkenedBackground(player) {
 function events() {
 
     // When clicking a player, a focused timeline is created showing overlapping players.
-    timeline.on("select", function (properties) {
-        timelineContainer.append(createLoader());
+    timeline.on("select", (properties) => {
+        document.getElementById("player-search").value = "";
         createTimeline(properties.items);
     });
 

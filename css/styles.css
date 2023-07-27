@@ -38,14 +38,41 @@ button:hover {
     background-color: #555;
 }
 
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    flex: 0.85;
+    min-width: 100px;
+    display: flex;
+}
+
 .search-bar {
     background-color: #212121;
     color: #fff;
     border: none;
     border-radius: 5px;
-    flex: 0.85;
-    min-width: 100px;
     padding: 8px;
+    flex: 1;
+    overflow: hidden;
+    outline: none;
+}
+
+.autocomplete-results {
+    position: absolute;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-results div {
+    background-color: #303030;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-focused {
+    background-color: #555 !important;
 }
 
 #timeline {
@@ -54,10 +81,11 @@ button:hover {
 }
 
 /* Timeline item */
-.vis-item {
+.vis-item.vis-range {
     background-color: #61717A;
     border: 0;
     color: white;
+    cursor: pointer;
 }
 
 /* Tooltip */
@@ -99,23 +127,23 @@ div.vis-tooltip {
 
 /* Ranks */
 .cloudian {
-    background-color: #5555FF;
+    background-color: #5555FF !important;
 }
 
 .elder {
-    background-color: #AA00AA;
+    background-color: #AA00AA !important;
 }
 
 .chicken {
-    background-color: #FF5555;
+    background-color: #FF5555 !important;
 }
 
 .chick {
-    background-color: #FF55FF;
+    background-color: #FF55FF !important;
 }
 
 .egg {
-    background-color: #00AA00;
+    background-color: #00AA00 !important;
 }
 
 /* Loader */
