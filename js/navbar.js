@@ -21,7 +21,14 @@ infoButton.addEventListener("click", () => {
     setTimeout(() => infoOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.6)", 1);
 });
 
-closeButton.addEventListener("click", () => {
+closeButton.addEventListener("click", () => hideInfo());
+infoOverlay.addEventListener("click", () => hideInfo());
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") hideInfo();
+});
+
+function hideInfo() {
 
     infoOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     infoPopup.style.opacity = 0;
@@ -31,7 +38,7 @@ closeButton.addEventListener("click", () => {
         infoPopup.style.display = "none";
     }, 200);
 
-});
+}
 
 (async function() {
     players = await getMostTime(true);
