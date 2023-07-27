@@ -22,7 +22,7 @@ nav {
     padding: 10px;
 }
 
-.nav-button {
+button {
     background-color: #444;
     color: #fff;
     border: none;
@@ -31,6 +31,9 @@ nav {
     cursor: pointer;
     min-width: 75px;
     padding: 8px 2vw;
+}
+
+.nav-button {
     margin: 0 2vw;
 }
 
@@ -73,6 +76,74 @@ button:hover {
 
 .autocomplete-focused {
     background-color: #555 !important;
+}
+
+#info-popup-overlay {
+    display: none;
+    position: fixed;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.0);
+    transition: background-color 0.2s ease;
+}
+
+#info-popup {
+    background-color: #303030;
+    border-radius: 5px;
+    display: none;
+    text-align: center;
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-shadow: 10px 10px 15px #181818;
+    width: 700px;
+    max-width: 75vw;
+    max-height: 75vh;
+    overflow-y: scroll;
+}
+
+#info-popup div {
+    text-align: left;
+    padding: 15px;
+}
+
+#info-popup h2 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+#info-popup h3 {
+    margin-top: 30px;
+    margin-bottom: 8px;
+}
+
+#info-popup p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+#info-popup td {
+    padding: 5px;
+}
+
+kbd {
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.rank {
+    border-radius: 5px;
+}
+
+#close {
+    /* position: absolute; */
 }
 
 #timeline {

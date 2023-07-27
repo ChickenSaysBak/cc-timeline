@@ -1,10 +1,36 @@
 const resetButton = document.getElementById("reset");
+
+const infoButton = document.getElementById("info");
+const infoPopup = document.getElementById("info-popup");
+const infoOverlay = document.getElementById("info-popup-overlay");
+const closeButton = document.getElementById("close");
+
 const searchBar = document.getElementById("player-search");
 var players = [];
 
 resetButton.addEventListener("click", () => {
     searchBar.value = "";
     createTimeline();
+});
+
+infoButton.addEventListener("click", () => {
+    infoPopup.style.display = "block";
+    infoOverlay.style.display = "block";
+    infoPopup.scrollTop = 0;
+    infoPopup.style.opacity = 1;
+    setTimeout(() => infoOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.6)", 1);
+});
+
+closeButton.addEventListener("click", () => {
+
+    infoOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
+    infoPopup.style.opacity = 0;
+  
+    setTimeout(() => {
+        infoOverlay.style.display = "none";
+        infoPopup.style.display = "none";
+    }, 200);
+
 });
 
 (async function() {

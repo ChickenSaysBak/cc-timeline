@@ -15,7 +15,64 @@
             <div class="autocomplete">
                 <input id="player-search" class="search-bar" type="text" autocomplete="off" placeholder="Search for players...">
             </div>
-            <button id=class="nav-button">Info</button>
+            <button id="info" class="nav-button">Info</button>
+            <div id="info-popup-overlay"></div>
+            <div id="info-popup">
+                <div>
+                    <h2>CozyCloud Timeline</h2>
+                    <p>This is an interactive timeline that maps CozyCloud's community throughout the years.</p>
+                    <h3>Navigation</h3>
+                    <table>
+                        <tr>
+                            <td>↕</td>
+                            <td>Scroll up and down to move vertically.</td>
+                        </tr>
+                        <tr>
+                            <td>↔</td>
+                            <td>Click and drag to move horizontally.</td>
+                        </tr>
+                        <tr>
+                            <td>🔎</td>
+                            <td>Press <kbd>CTRL</kbd> while scrolling to zoom in and out or pinch to zoom on.</td>
+                        </tr>
+                        <tr>
+                            <td>👤</td>
+                            <td>Click a player's name on the timeline to view a focused timeline of that player.</td>
+                        </tr>
+                        <tr>
+                            <td>👥</td>
+                            <td>Hover over an <u>underlined</u> player's name to view their alternate accounts.</td>
+                        </tr>
+                    </table>
+                    <h3>Colors</h3>
+                    <p>Players on the timeline are color coded by rank.</p>
+                    <table>
+                        <tr>
+                            <td><div class="rank cloudian"></div></td>
+                            <td>Cloudian</td>
+                        </tr>
+                        <tr>
+                            <td><div class="rank elder"></div></td>
+                            <td>Elder</td>
+                        </tr>
+                        <tr>
+                            <td><div class="rank chicken"></div></td>
+                            <td>Chicken</td>
+                        </tr>
+                        <tr>
+                            <td><div class="rank chick"></div></td>
+                            <td>Chick</td>
+                        </tr>
+                        <tr>
+                            <td><div class="rank egg"></div></td>
+                            <td>Egg</td>
+                        </tr>
+                    </table>
+                    <h3>Stay Connected</h3>
+                    <a href="https://discord.gg/vBEWAuY"><img src="https://img.shields.io/discord/280048938000580609?logo=discord&logoColor=white&label=Discord&color=7289da"></a>
+                </div>
+                <button id="close">Close</button>
+            </div>
         </nav>
         <div id="timeline">
             <div class="loader"></div>
