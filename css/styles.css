@@ -143,10 +143,6 @@ kbd {
     border-radius: 5px;
 }
 
-#close {
-    /* position: absolute; */
-}
-
 #timeline {
     width: 99%;
     height: 93%;
