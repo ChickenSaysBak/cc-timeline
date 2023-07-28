@@ -133,6 +133,10 @@ button:hover {
     padding: 5px;
 }
 
+#info-popup li {
+    margin-bottom: 8px;
+}
+
 kbd {
     border: 1px solid white;
     border-radius: 3px;
