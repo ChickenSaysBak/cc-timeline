@@ -1,4 +1,4 @@
-const BASE_URL = "https://cc-playerdata-webapp.azuremicroservices.io/api/playerdata";
+const BASE_URL = "http://cc-playerdata-app.us-east-2.elasticbeanstalk.com/api/playerdata";
 
 async function getMostTime(all) {
     return fetchJson(BASE_URL + "/most_time" + (all ? "" : "?limit=1000&combineAlts=true"));
