@@ -1,4 +1,4 @@
-const BASE_URL = "http://cc-playerdata-app.us-east-2.elasticbeanstalk.com/api/playerdata";
+const BASE_URL = "https://fjbpf3sb3r4dpjauqwzebltr2y0gsqxa.lambda-url.us-east-2.on.aws/api/playerdata";
 
 async function getMostTime(all) {
     return fetchJson(BASE_URL + "/most_time" + (all ? "" : "?limit=1000&combineAlts=true"));
