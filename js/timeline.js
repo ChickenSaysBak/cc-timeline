@@ -128,7 +128,7 @@ function events() {
     // When clicking a player, a focused timeline is created showing overlapping players.
     timeline.on("select", (properties) => {
         document.getElementById("player-search").value = "";
-        createTimeline(properties.items);
+        createTimeline(getOwner(properties.items[0]));
     });
 
     // Removes loading screen
