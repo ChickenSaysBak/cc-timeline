@@ -6,5 +6,3 @@ An [interactive timeline](https://chickensaysbak.github.io/cc-timeline) that map
 
 ### Preview
 <img src="https://i.imgur.com/wNrxBnI.png"></img>
-
-###### Made using the [cc-playerdata](https://github.com/ChickenSaysBak/cc-playerdata) REST API.
